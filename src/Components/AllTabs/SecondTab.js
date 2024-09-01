@@ -24,7 +24,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para buscar clientes do backend
   const fetchClientes = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/clientes");
+      const response = await axios.get("http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/clientes");
       setDados(
         response.data.map((item) => ({
           ...item,
@@ -44,7 +44,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para deletar um cliente
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/clientes/${id}`);
+      await axios.delete(`http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/clientes/${id}`);
       setDados(dados.filter((item) => item.id !== id));
     } catch (error) {
       console.error("Erro ao deletar cliente:", error);
@@ -63,7 +63,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para salvar as alterações de um cliente
   const handleSave = async (id) => {
     try {
-      const response = await axios.put(`http://localhost:3000/clientes/${id}`, {
+      const response = await axios.put(`http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/clientes/${id}`, {
         nome: novoNome,
         nascimento: novoNascimento,
         valor: novoValor,
@@ -79,7 +79,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para adicionar um novo cliente
   const handleAdd = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/clientes", {
+      const response = await axios.post("http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/clientes", {
         nome: novoItemNome,
         nascimento: novoItemNascimento,
         valor: novoItemValor,
@@ -111,7 +111,7 @@ const TabelaComEdicaoEDelecao = () => {
           // Envia cada cliente para o backend para ser salvo no banco de dados
           await Promise.all(
             clientes.map((cliente) =>
-              axios.post("http://localhost:3000/clientes", cliente)
+              axios.post("http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/clientes", cliente)
             )
           );
           fetchClientes(); // Atualiza a lista de clientes

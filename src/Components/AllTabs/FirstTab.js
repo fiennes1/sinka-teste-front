@@ -11,7 +11,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para buscar operadores do backend
   const fetchOperadores = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/operadores");
+      const response = await axios.get("http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/operadores");
       setDados(response.data);
     } catch (error) {
       console.error("Erro ao buscar operadores:", error);
@@ -26,7 +26,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para deletar um operador
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/operadores/${id}`);
+      await axios.delete(`http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/operadores/${id}`);
       setDados(dados.filter((item) => item.id !== id));
     } catch (error) {
       console.error("Erro ao deletar operador:", error);
@@ -42,7 +42,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para salvar as alterações de um operador
   const handleSave = async (id) => {
     try {
-      const response = await axios.put(`http://localhost:3000/operadores/${id}`, {
+      const response = await axios.put(`http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/operadores/${id}`, {
         nome: novoNome,
       });
       setDados(dados.map((item) => (item.id === id ? response.data : item)));
@@ -55,7 +55,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para adicionar um novo operador
   const handleAdd = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/operadores", {
+      const response = await axios.post("http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/operadores", {
         nome: novoItemNome,
       });
    

@@ -17,7 +17,7 @@ const ThirdTab = () => {
   // Função para buscar operadores do backend
   const fetchOperadores = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/operadores");
+      const response = await axios.get("http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/operadores");
       setOperadores(response.data);
     } catch (error) {
       console.error("Erro ao buscar operadores:", error);
@@ -27,7 +27,7 @@ const ThirdTab = () => {
   // Função para buscar clientes do backend
   const fetchClientes = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/clientes");
+      const response = await axios.get("http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/clientes");
       setClientes(response.data);
     } catch (error) {
       console.error("Erro ao buscar clientes:", error);
