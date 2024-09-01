@@ -86,6 +86,7 @@ const TabelaComEdicaoEDelecao = () => {
       </div>
 
       {/* Tabela de operadores */}
+      <div style={{ overflowX: "auto", maxHeight: "400px", overflowY: "auto", border: "1px solid #ddd", marginTop: "20px" }}>
       <table border="1" cellPadding="10">
         <thead>
           <tr>
@@ -139,6 +140,8 @@ const TabelaComEdicaoEDelecao = () => {
         </tbody>
       </table>
     </div>
+    </div>
+    
   );
 };
 

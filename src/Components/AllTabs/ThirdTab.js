@@ -87,7 +87,7 @@ const ThirdTab = () => {
       {/* Listagem de operadores com seus clientes */}
       <h3>Operadores e seus Clientes</h3>
       <br />
-      <div style={{ maxHeight: '800px', overflowY: 'auto', border: '1px solid #ddd', padding: '10px' }}>
+      <div style={{ overflowX: "auto", maxHeight: "400px", overflowY: "auto", border: "1px solid #ddd", marginTop: "20px" }}>
         {Object.entries(distribuicao).map(([operador, clientes]) => (
           <div key={operador} style={{ marginBottom: '20px' }}>
             <h4>{operador}</h4>

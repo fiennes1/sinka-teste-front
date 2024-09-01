@@ -122,6 +122,7 @@ ul.nav li.active {
 }
 
 .ThirdTab {
-  padding: 1rem 2rem; /* Adiciona padding para afastar do background */
-  margin-top: 2rem; /* Adiciona um espaço superior para separar do topo */
+  padding: 1rem 2rem; 
+  margin-top: 2rem;
+  padding: 20px;
 }

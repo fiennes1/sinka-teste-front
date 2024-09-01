@@ -182,7 +182,7 @@ const TabelaComEdicaoEDelecao = () => {
       </div>
 
       {/* Contêiner para rolagem da tabela */}
-      <div style={{ overflowX: "auto", maxHeight: "400px", overflowY: "auto", border: "1px solid #ddd", marginTop: "20px" }}>
+      <div style={{ overflowX: "auto", maxHeight: "300px", overflowY: "auto", border: "1px solid #ddd", marginTop: "20px" }}>
         <table border="1" cellPadding="10" style={{ width: "100%", minWidth: "600px" }}>
           <thead>
             <tr>
