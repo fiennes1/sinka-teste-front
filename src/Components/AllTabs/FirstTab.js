@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+
+// Componente TabelaComEdicaoEDelecao exibe uma tabela de operadores onde é permitido editar, deletar e adicionar
 const TabelaComEdicaoEDelecao = () => {
   // Estado para os dados da tabela
   const [dados, setDados] = useState([]);
-  const [editando, setEditando] = useState(null);
-  const [novoNome, setNovoNome] = useState("");
-  const [novoItemNome, setNovoItemNome] = useState("");
+  const [editando, setEditando] = useState(null); // Estado para rastrear o item sendo editado
+  const [novoNome, setNovoNome] = useState(""); // Estado para o nome atualizado do operador
+  const [novoItemNome, setNovoItemNome] = useState(""); // Estado para o nome de um novo operador
+
 
   // Função para buscar operadores do backend
   const fetchOperadores = async () => {
     try {
-      const response = await axios.get("http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/operadores");
+      const response = await axios.get("http://98.81.224.210:3000/operadores");
       setDados(response.data);
     } catch (error) {
       console.error("Erro ao buscar operadores:", error);
@@ -26,7 +29,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para deletar um operador
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/operadores/${id}`);
+      await axios.delete(`http://98.81.224.210:3000/operadores/${id}`);
       setDados(dados.filter((item) => item.id !== id));
     } catch (error) {
       console.error("Erro ao deletar operador:", error);
@@ -42,7 +45,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para salvar as alterações de um operador
   const handleSave = async (id) => {
     try {
-      const response = await axios.put(`http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/operadores/${id}`, {
+      const response = await axios.put(`http://98.81.224.210:3000/operadores/${id}`, {
         nome: novoNome,
       });
       setDados(dados.map((item) => (item.id === id ? response.data : item)));
@@ -55,12 +58,12 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para adicionar um novo operador
   const handleAdd = async () => {
     try {
-      const response = await axios.post("http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/operadores", {
+      const response = await axios.post("http://98.81.224.210:3000/operadores", {
         nome: novoItemNome,
       });
    
-      setDados([...dados, response.data]);
-      setNovoItemNome("");
+      setDados([...dados, response.data]); // Adiciona o novo operador ao estado
+      setNovoItemNome(""); // Limpa o campo de entrada
     } catch (error) {
       console.error("Erro ao adicionar operador:", error);
     }

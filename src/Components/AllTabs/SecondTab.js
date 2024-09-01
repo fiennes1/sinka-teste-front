@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Papa from "papaparse";
 
+// Componente principal que exibe uma tabela de clientes com funcionalidades de edição, deleção e adição (também por CSV).
 const TabelaComEdicaoEDelecao = () => {
   const [dados, setDados] = useState([]);
   const [editando, setEditando] = useState(null);
@@ -24,7 +25,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para buscar clientes do backend
   const fetchClientes = async () => {
     try {
-      const response = await axios.get("http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/clientes");
+      const response = await axios.get("http://98.81.224.210:3000/clientes");
       setDados(
         response.data.map((item) => ({
           ...item,
@@ -44,7 +45,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para deletar um cliente
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/clientes/${id}`);
+      await axios.delete(`http://98.81.224.210:3000/clientes/${id}`);
       setDados(dados.filter((item) => item.id !== id));
     } catch (error) {
       console.error("Erro ao deletar cliente:", error);
@@ -63,7 +64,7 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para salvar as alterações de um cliente
   const handleSave = async (id) => {
     try {
-      const response = await axios.put(`http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/clientes/${id}`, {
+      const response = await axios.put(`http://98.81.224.210:3000/clientes/${id}`, {
         nome: novoNome,
         nascimento: novoNascimento,
         valor: novoValor,
@@ -79,13 +80,14 @@ const TabelaComEdicaoEDelecao = () => {
   // Função para adicionar um novo cliente
   const handleAdd = async () => {
     try {
-      const response = await axios.post("http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/clientes", {
+      const response = await axios.post("http://98.81.224.210:3000/clientes", {
         nome: novoItemNome,
         nascimento: novoItemNascimento,
         valor: novoItemValor,
         email: novoItemEmail,
       });
       setDados([...dados, response.data]);
+      // Limpa os campos do formulário após adicionar
       setNovoItemNome("");
       setNovoItemNascimento("");
       setNovoItemValor("");
@@ -111,7 +113,7 @@ const TabelaComEdicaoEDelecao = () => {
           // Envia cada cliente para o backend para ser salvo no banco de dados
           await Promise.all(
             clientes.map((cliente) =>
-              axios.post("http://nodedatabase.cvamkqwoka27.us-east-1.rds.amazonaws.com:3306/clientes", cliente)
+              axios.post("http://98.81.224.210:3000/clientes", cliente)
             )
           );
           fetchClientes(); // Atualiza a lista de clientes
@@ -135,6 +137,7 @@ const TabelaComEdicaoEDelecao = () => {
     <div>
       {/* Input para upload de CSV */}
       <div>
+        <label>Adicione arquivo CSV:</label>
         <input
           type="file"
           accept=".csv"
